@@ -1,0 +1,109 @@
+This homework has two parts, where the first is a coding task of a small tool, and the second part is about testing your coding task on different platforms.
+ 
+Coding task
+
+-------------------
+
+ Implement a script in Python that searches one or more named input files
+(standard input if no files are specified, or the file name '-' is given) for
+
+lines containing a match to a regular expression pattern (given on command line as well).
+
+ 
+Assume that input is ascii, you don't need to deal with a different encoding.
+
+ 
+If a line matches, print it. Please print the file name and the line number for every match.
+
+ 
+Script accept list optional parameters which are mutually exclusive:
+
+-u ( --underscore ) which prints '^' under the matching text
+
+-c ( --color ) which highlight matching text [1]
+
+-m ( --machine ) which generate machine readable output
+
+                 format: file_name:no_line:start_pos:matched_text
+
+ 
+Multiple matches on a single line are allowed, without overlapping.
+
+ 
+The script should be compatible with Python 2.7, and in line script with PEP8 coding guidelines.
+
+Add a few automated functional tests to your script (testing framework of your choice).
+
+ 
+
+ 
+
+Hints:
+
+* It is recommended to use a module for parsing the command line
+
+arguments and the "re" module for matching the pattern.
+
+* Try to use OOP in order to encapsulate differences between output
+
+formats. If you do, please mention it in the documentation.
+
+ 
+[1] http://www.pixelbeat.org/docs/terminal_colours
+
+ 
+
+Testing with Python 2.7 & 3.6
+
+---------------------------------------
+
+ 
+In this part, you will reuse your tests written in the previous task.
+
+As mentioned before you could use whatever testing framework you like.
+
+ 
+We want to be able to run these tests on any system,
+
+do not assume any tools installed,
+
+nor `virtualenv` is not available ...
+
+ 
+Only available tools on system:
+
+- bash
+
+- make
+
+- docker
+
+Docker service is configured and running.
+The System is able to reach the public docker registry (hub.docker.com).
+
+ 
+
+We want to run the tests on both python 2.7 & 3.6, each version in a different container.
+
+ 
+We expect that you provide a Makefile, which implements
+
+targets 'build` to build the containers for tests
+
+and target `run` to run the tests inside these two containers.
+
+The targets should build/run both versions
+
+ 
+HINT: Consider these containers as a developer's
+
+environment were you can repetitively test your script
+
+which is under development. So you don't want to embed your script
+
+inside the container during build.
+
+** Please submit your task via link only (and not attachments)
+
+Feel free to ask any questions you have.
+Best regards,
