@@ -10,7 +10,7 @@ def get_parsed_args(args):
     add_positional_args_to_parser(parser)
     add_optional_args_to_parser(parser)
     parsed_args = parser.parse_args(args)
-    if [parsed_args.add_color, parsed_args.add_underscore, parsed_args.gen_machine_output].count(True) > 1:
+    if list(parsed_args.__dict__.values()).count(True) > 1:
         raise ValueError("Optional parameters are mutually exclusive, more then 1 True value was found")
     return parsed_args
 
