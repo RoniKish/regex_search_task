@@ -7,8 +7,9 @@ from main import get_parsed_args, get_regex_search_class
 
 @pytest.mark.parametrize("test_class", [RegexSearcher, RegexSearcherUnderscore, RegexSearcherColor, RegexSearcherMachine])
 def test_wrong_regex_error(test_class):
-    with pytest.raises(re.error):
+    with pytest.raises(re.error) as ex_info:
         test_class("[0-9]++", "--..2312")
+    assert ex_info.value.message == 'regular expression is not valid'
 
 
 @pytest.mark.parametrize("test_input, expected_type",

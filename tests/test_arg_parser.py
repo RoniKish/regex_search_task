@@ -1,9 +1,9 @@
 import os
 import sys
+import pytest
 app_src_folder = os.path.abspath('./app')
 sys.path.insert(0, app_src_folder)
 
-import pytest
 from main import get_parsed_args
 
 
@@ -15,6 +15,12 @@ def test_single_script_input():
 def test_multi_scripts_input():
     parsed_args = get_parsed_args(['regex', 'f_name_1', 'f_name_2', 'f_name_3'])
     compare_parsed_args(parsed_args, [False, False, False, 'regex', ['f_name_1', 'f_name_2', 'f_name_3']])
+
+
+def test_invalid_regex_input():
+    with pytest.raises(SystemExit) as ex_info:
+        get_parsed_args(['[0-9]++', 'f_name'])
+    assert ex_info.typename == 'SystemExit'
 
 
 def test_no_file_input():
@@ -37,8 +43,9 @@ def test_parse_optional_param(test_input, expected):
 
 
 def test_2_optional_param():
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError) as ex_info:
         get_parsed_args(['regex', 'f_name', '-c', 'True', '-u', 'True'])
+    assert ex_info.value.message == "Optional parameters are mutually exclusive, more then 1 True value was found"
 
 
 def compare_parsed_args(parsed_args, expected_args):

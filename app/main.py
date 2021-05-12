@@ -32,6 +32,7 @@ def add_optional_args_to_parser(parser):
 
 
 def validate_arg_bool_type(arg):
+    """Validate given arg is of bool type"""
     if isinstance(arg, bool):
         return arg
     if arg.lower() in ('true', '1', 't'):
@@ -43,6 +44,7 @@ def validate_arg_bool_type(arg):
 
 
 def validate_arg_regex_type(arg):
+    """Validate given arg is a valid regex"""
     try:
         re.compile(arg)
         return arg
@@ -51,6 +53,7 @@ def validate_arg_regex_type(arg):
 
 
 def get_std_in():
+    """Get a user std in"""
     try:
         data = sys.stdin.read()
         return data.split()
@@ -83,7 +86,7 @@ def main():
     """
     args = get_parsed_args(sys.argv[1:])
     if args.input_files == '-' or args.input_files[0] == '-':
-        print("getting data from std in: \n")
+        print("getting data from std in\n")
         args.input_files = get_std_in()
     red_hat_regex_searcher = get_regex_search_class(args)
     red_hat_regex_searcher.search_all()
