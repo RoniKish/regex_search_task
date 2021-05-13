@@ -45,7 +45,7 @@ def test_parse_optional_param(test_input, expected):
 def test_2_optional_param():
     with pytest.raises(ValueError) as ex_info:
         get_parsed_args(['regex', 'f_name', '-c', 'True', '-u', 'True'])
-    assert ex_info.value.message == "Optional parameters are mutually exclusive, more then 1 True value was found"
+    assert ex_info.value.args[0] == "Optional parameters are mutually exclusive, more then 1 True value was found"
 
 
 def compare_parsed_args(parsed_args, expected_args):
