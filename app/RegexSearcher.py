@@ -15,14 +15,14 @@ class RegexSearcher:
         for file_name in self.input_files:
             self.search_in_file(file_name)
 
-    def search_in_file(self, file_name):
+    def search_in_file(self, file_path):
         result_lines = []
-        with open(file_name) as file_to_search:
+        with open(file_path) as file_to_search:
             for line_num, line in enumerate(file_to_search):
                 search_results = self.regex.findall(line)
                 current_line_pos = 0
                 for result in search_results:
-                    result_line = {"file_name": file_name,
+                    result_line = {"file_name": file_path,
                                    "matching_string": result,
                                    "line_string": line.rstrip(),
                                    "line_number": line_num,
@@ -30,7 +30,7 @@ class RegexSearcher:
                     result_line["final_result_line_string"] = self.get_final_result_line_string(result_line)
                     result_lines.append(result_line)
                     current_line_pos = result_line["match_string_pos"] + len(result) + 1
-        self.search_results[file_name] = result_lines
+        self.search_results[file_path] = result_lines
 
     def get_final_result_line_string(self, result_line):
         return result_line['file_name'] + " > line " + str(result_line['line_number']) + \
